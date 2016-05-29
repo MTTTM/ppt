@@ -151,8 +151,8 @@ var GameLayer = cc.Layer.extend({
                 } else {
                     var fallLength = missCount;
                     if (fallLength > 0) {
-                       // var duration = Math.sqrt(2 * fallLength / Constant.FALL_ACCELERATION);
-                       var duration=1;
+                        // var duration = Math.sqrt(2 * fallLength / Constant.FALL_ACCELERATION);
+                        var duration = 1;
                         if (duration > maxTime)
                             maxTime = duration;
                         var move = cc.moveTo(duration, candy.x, candy.y - Constant.CANDY_WIDTH * fallLength).easing(cc.easeIn(2)); //easeIn参数是幂，以几次幂加速
@@ -177,21 +177,29 @@ var GameLayer = cc.Layer.extend({
 
     _checkSucceedOrFail: function() {
         if (this.score > this.targetScore) {
+            this.moving = true;
             this.ui.showSuccess();
+
             this.score += (this.limitStep - this.steps) * 30;
             Storage.setCurrentLevel(this.level + 1);
-
             //Storage.setCurrentScore(this.score);
             Storage.setCurrentScore(0);
+            console.log(this.moving)
             this.scheduleOnce(function() {
                 cc.director.runScene(new GameScene());
+                this.moving = false;
             }, 3);
         } else if (this.steps >= this.limitStep) {
+            this.moving = true;
+            console.log(this.moving)
+            console.log("失败了，")
             this.ui.showFail();
+            
             Storage.setCurrentLevel(0);
             Storage.setCurrentScore(0);
             this.scheduleOnce(function() {
                 cc.director.runScene(new GameScene());
+                this.moving = false;
             }, 3);
         }
     }

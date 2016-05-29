@@ -53,7 +53,7 @@ var GameUI = cc.Layer.extend({
 
     showSuccess: function() {
         var bg = new cc.LayerColor(cc.color(255, 255, 255), 500, 500);
-        this.addChild(bg, 1);
+        this.addChild(bg, 3);
         var size = cc.director.getWinSize();
         bg.x = (size.width - bg.width) / 2;
         bg.y = (size.height - bg.height) / 2;
@@ -66,7 +66,7 @@ var GameUI = cc.Layer.extend({
 
     showFail: function() {
         var bg = new cc.LayerColor(cc.color(255, 255, 255), 500, 500);
-        this.addChild(bg, 1);
+        this.addChild(bg, 3);
         var size = cc.director.getWinSize();
         bg.x = (size.width - bg.width) / 2;
         bg.y = (size.height - bg.height) / 2;
